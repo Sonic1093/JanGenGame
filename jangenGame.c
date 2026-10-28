@@ -7,7 +7,7 @@
 #include<stdio.h>
 
 /* プロトタイプ宣言---------------------------------------------------------- */
-
+void startGame();
 
 /* マクロ定義---------------------------------------------------------------- */
 
@@ -17,7 +17,7 @@
 /* main関数------------------------------------------------------------------ */
 int main (void){
 
-
+    startGame();
 
     return 0;
 }
@@ -30,16 +30,38 @@ int main (void){
 /*                                                                            */
 /*--------------------------------------------------------------------------- */
 
-void startGame( ){
+void startGame(){
 
+    char janGame[3][20] = { "グー",
+                            "パー   ",
+                            "チョキ"
+                            };
+    int randG; //ランダムでパー、グー、チョキをきめる
+    int myG;
+    
+    printf("じゃんけんをします\nスペースキーを押してください\n");
+    printf("\nじゃんけん・・・\n");
+    
 
+    srand((unsigned)time(NULL));
+    randG = rand() % 3;
+    
+
+    printf("何を出す？\n");
+    printf("グー：1\nパー：2\nチョキ：3\n");
+    scanf("%d",&myG);
+
+    printf("\nぽん!\n\n");
+
+    printf("あなた：%s\n", janGame[myG-1]);
+    printf("相手  ：%s\n", janGame[randG]);
 }
 
 
 void result(int value1, int value2){
 
-
     
+
 }
 
 /*
