@@ -5,9 +5,13 @@
 /* -------------------------------------------------------------------------- */
 /* ヘッダファイル------------------------------------------------------------ */
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<string.h>
 
 /* プロトタイプ宣言---------------------------------------------------------- */
 void startGame();
+void result(char *value1, char *value2);
 
 /* マクロ定義---------------------------------------------------------------- */
 
@@ -17,7 +21,12 @@ void startGame();
 /* main関数------------------------------------------------------------------ */
 int main (void){
 
+    printf("じゃんけんをします\nスペースキーを押してください\n");
+    printf("\nじゃんけん・・・\n");
+    printf("何を出す？\n");
+    printf("グー：1\nパー：2\nチョキ：3\n\n> ");
     startGame();
+
 
     return 0;
 }
@@ -33,35 +42,62 @@ int main (void){
 void startGame(){
 
     char janGame[3][20] = { "グー",
-                            "パー   ",
+                            "パー",
                             "チョキ"
                             };
     int randG; //ランダムでパー、グー、チョキをきめる
     int myG;
     
-    printf("じゃんけんをします\nスペースキーを押してください\n");
-    printf("\nじゃんけん・・・\n");
-    
-
     srand((unsigned)time(NULL));
     randG = rand() % 3;
     
-
-    printf("何を出す？\n");
-    printf("グー：1\nパー：2\nチョキ：3\n");
-    scanf("%d",&myG);
+    scanf("%d", &myG);
+    while(myG < 1 || myG > 3){
+        printf("もう一度(1~3): ");
+        scanf("%d", &myG);
+    }
 
     printf("\nぽん!\n\n");
 
     printf("あなた：%s\n", janGame[myG-1]);
     printf("相手  ：%s\n", janGame[randG]);
+
+    result(janGame[myG-1], janGame[randG]);
+    
 }
 
 
-void result(int value1, int value2){
+void result(char *value1, char *value2){
 
-    
-
+    if(strcmp(value1, value2) == 0){
+        printf("\nあいこで・・・\n");
+        printf("しょ。。\n");
+        startGame();
+    }
+    else if(strcmp(value1, "グー") == 0){
+        if(strcmp(value2, "パー")== 0){
+            printf("\nあなたの負けです。。\n");
+        }
+        else if(strcmp(value2, "チョキ")== 0){
+            printf("\nあなたの勝ちです!\n");
+        }
+    }
+    else if(strcmp(value1, "パー") == 0){
+        if(strcmp(value2, "グー") == 0){
+             printf("\nあなたの勝ちです!\n");
+        }
+        else if(strcmp(value2, "チョキ") ==0){
+            printf("\nあなたの負けです。。\n");
+        }
+    }
+    else if(strcmp(value1, "チョキ") == 0){
+        if(strcmp(value2, "グー")){
+             printf("\nあなたの負けです。。\n");
+        }
+        else if(strcmp(value2, "パー")==0){
+            printf("\nあなたの勝ちです!\n");
+        }
+    }
 }
 
 /*
