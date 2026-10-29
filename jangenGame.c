@@ -10,6 +10,7 @@
 #include<string.h>
 
 /* プロトタイプ宣言---------------------------------------------------------- */
+void text();
 void startGame();
 void result(char *value1, char *value2);
 
@@ -21,12 +22,20 @@ void result(char *value1, char *value2);
 /* main関数------------------------------------------------------------------ */
 int main (void){
 
-    printf("じゃんけんをします\nスペースキーを押してください\n");
-    printf("\nじゃんけん・・・\n");
-    printf("何を出す？\n");
-    printf("グー：1\nパー：2\nチョキ：3\n\n> ");
+    int gaContinue; //game continue ??
+    text();
     startGame();
 
+    while(1){
+        printf("\nもう一度しますか？\nはい：1\nいいえ：0\n");
+        scanf("%d", &gaContinue);
+        if(gaContinue == 1){
+            text();
+            startGame();
+        }else if(gaContinue == 0) {
+            return 0;
+        }
+    }
 
     return 0;
 }
@@ -39,6 +48,15 @@ int main (void){
 /*                                                                            */
 /*--------------------------------------------------------------------------- */
 
+//show text
+void text(){
+    printf("じゃんけんをします\nスペースキーを押してください\n");
+    printf("\nじゃんけん・・・\n");
+    printf("何を出す？\n");
+    printf("グー：1\nパー：2\nチョキ：3\n\n> ");
+}
+
+//calculate user input
 void startGame(){
 
     char janGame[3][20] = { "グー",
@@ -46,7 +64,7 @@ void startGame(){
                             "チョキ"
                             };
     int randG; //ランダムでパー、グー、チョキをきめる
-    int myG;
+    int myG; //my Game number
     
     srand((unsigned)time(NULL));
     randG = rand() % 3;
@@ -66,7 +84,7 @@ void startGame(){
     
 }
 
-
+// calculate win or lose or draw
 void result(char *value1, char *value2){
 
     if(strcmp(value1, value2) == 0){
