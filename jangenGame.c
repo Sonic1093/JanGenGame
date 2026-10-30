@@ -69,11 +69,25 @@ void startGame(){
     srand((unsigned)time(NULL));
     randG = rand() % 3;
     
-    scanf("%d", &myG);
-    while(myG < 1 || myG > 3){
-        printf("‚à‚¤ˆê“x(1~3): ");
-        scanf("%d", &myG);
-    }
+
+    //‚à‚µ”š‚¶‚á‚È‚¢‚ÆŒJ‚è•Ô‚·‚±‚Æand1‚©‚ç3ˆÈã‚É‚È‚Á‚½‚çŒJ‚è•Ô‚·
+    while(1){
+    int ret =scanf("%d", &myG);
+        if(ret != 1){
+            int c;
+            while((c=getchar()) != '\n' && c != EOF);
+            printf("try again \n");
+            printf("‚à‚¤ˆê“x(1~3): ");
+            continue; 
+        }
+        while(myG < 1 || myG > 3){
+            printf("try again\n");
+            printf("‚à‚¤ˆê“x(1~3): ");
+            scanf("%d", &myG);
+            continue;
+        }
+        break;
+   }
 
     printf("\n‚Û‚ñ!\n\n");
 
